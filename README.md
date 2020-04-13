@@ -1,96 +1,151 @@
-LibEndian
+Endn
 =============
 
 A cross platform C++ library to get rid with of binary serialization issues. This library can serialize in buffer the most common types.
 
-## Dependencies
-
-* [Doxygen](https://github.com/doxygen/doxygen) : To generate the documentation.
-* [DoxygenBootstrapped](https://github.com/OlivierLDff/DoxygenBootstrapped) : Integrate doxygen with CMake. *v1.3.2*.
-
 ## Supported Types
 
-All the types are from `stdint.h`.
+All the types are from `cstdint`.
 
-|    Type    |  Size (in bytes)   |      Read       |      Write      |
-| :--------: | :----------------: | :-------------: | :-------------: |
-| `uint8_t`  |  `UINT8_SIZE` : 1  |  **GET_UINT8**  |  **SET_UINT8**  |
-|  `int8_t`  |  `INT8_SIZE` : 1   |  **GET_INT8**   |  **SET_INT8**   |
-| `uint16_t` | `UINT16_SIZE` : 2  | **GET_UINT16**  | **SET_UINT16**  |
-| `int16_t`  |  `INT16_SIZE` : 2  |  **GET_INT16**  |  **SET_INT16**  |
-| `uint32_t` | `UINT32_SIZE` : 4  | **GET_UINT32**  | **SET_UINT32**  |
-| `int32_t`  |  `INT32_SIZE` : 4  |  **GET_INT32**  |  **SET_INT32**  |
-| `uint48_t` | `UINT48_SIZE` : 6  | **GET_UINT48**  | **SET_UINT48**  |
-| `int48_t`  |  `INT48_SIZE` : 6  |  **GET_INT48**  |  **SET_INT48**  |
-| `uint64_t` | `UINT64_SIZE` : 8  | **GET_UINT64**  | **SET_UINT64**  |
-| `int64_t`  |  `INT64_SIZE` : 8  |  **GET_INT64**  |  **SET_INT64**  |
-|  `float`   | `FLOAT32_SIZE` : 4 | **GET_FLOAT32** | **SET_FLOAT32** |
-|  `double`  | `FLOAT64_SIZE` : 8 | **GET_FLOAT64** | **SET_FLOAT64** |
+|      Type       |  Size (in bytes)   |      Read       |      Write      |
+| :-------------: | :----------------: | :-------------: | :-------------: |
+| `std::uint8_t`  |  `UINT8_SIZE` : 1  |  **GET_UINT8**  |  **SET_UINT8**  |
+|  `std::int8_t`  |  `INT8_SIZE` : 1   |  **GET_INT8**   |  **SET_INT8**   |
+| `std::uint16_t` | `UINT16_SIZE` : 2  | **GET_UINT16**  | **SET_UINT16**  |
+| `std::int16_t`  |  `INT16_SIZE` : 2  |  **GET_INT16**  |  **SET_INT16**  |
+| `std::uint32_t` | `UINT32_SIZE` : 4  | **GET_UINT32**  | **SET_UINT32**  |
+| `std::int32_t`  |  `INT32_SIZE` : 4  |  **GET_INT32**  |  **SET_INT32**  |
+| `std::uint48_t` | `UINT48_SIZE` : 6  | **GET_UINT48**  | **SET_UINT48**  |
+| `std::int48_t`  |  `INT48_SIZE` : 6  |  **GET_INT48**  |  **SET_INT48**  |
+| `std::uint64_t` | `UINT64_SIZE` : 8  | **GET_UINT64**  | **SET_UINT64**  |
+| `std::int64_t`  |  `INT64_SIZE` : 8  |  **GET_INT64**  |  **SET_INT64**  |
+|     `float`     | `FLOAT32_SIZE` : 4 | **GET_FLOAT32** | **SET_FLOAT32** |
+|    `double`     | `FLOAT64_SIZE` : 8 | **GET_FLOAT64** | **SET_FLOAT64** |
+
+## Quick Start
+
+**Endn** provide 2 main namespace: `Endn::Little` and `Endn::Big`. You should use one or the other depending on which format you need to handle.
+
+If you need to choose a format for you protocol, you should go with little endian because most cpu nowadays are little endian. This will reduce execution on most machine.
+
+### Serialization
+
+Both namespace provide function in the form `GET_<TYPE>`. That return a copy of the type in host ordered bytes. 
+
+Read function come with 2 signatures:
+
+* `(const std::uint8_t* buf)` : Equivalent of second signature with `offset = 0`.
+* `(const std::uint8_t* buf, const std::size_t offset)`
+
+```c++
+#include <Endn/Little.hpp>
+#include <Endn/Big.hpp>
+
+void main()
+{  
+    std::uint8_t buffer[] = {0x12, 0x34, 0x56, 0x78};
+    
+    std::uint32_t u32;
+    // Value is 0x012345678
+    u32 = Endn::Big::GET_UINT32(buffer);
+    // Value is 0x78563412
+    u32 = Endn::Little::GET_UINT32(buffer);
+    
+    std::uint16_t u16;
+    // Read at offset, value is 0x1234
+    u16 = Endn::Big::GET_UINT16(buffer, 0);
+    // Read at offset, value is 0x3456
+    u16 = Endn::Big::GET_UINT16(buffer, 1);
+    // Read at offset, value is 5678
+    u16 = Endn::Big::GET_UINT16(buffer, 2);  
+}
+```
+
+### Deserialization
+
+To write, both namespace provide `SET_<TYPE>` functions. They come with 3 signatures:
+
+* `(std::uint8_t * buf, const <type> val)`: Write at offset 0 of `buf`
+* `(std::uint8_t* buf, const std::size_t offset, const <type> val` : Write at offset `offset` of `buf`.
+* `(std::uint8_t* buf, const std::size_t offset, const <type> val, std::size_t& length)`: Write at offset `offset` of `buf` and increment `length` of size of `<type>`. This signature is useful to chain write into a buffer.
+
+```c++
+#include <Endn/Little.hpp>
+#include <Endn/Big.hpp>
+
+void main()
+{  
+    std::uint8_t buffer[] = {0x12, 0x34, 0x56, 0x78};
+    
+    // buffer is now {0xAB, 0xCD, 0x56, 0x78}
+    Endn::Big::SET_UINT16(buffer, 0xABCD); 
+    // buffer is now {0xCD, 0xAB, 0x56, 0x78}
+    Endn::Little::SET_UINT16(buffer, 0xABCD);
+    
+    // buffer is now {0xCD, 0xAB, 0x12, 0x34}
+    Endn::Big::SET_UINT16(buffer, 2, 0x1234); 
+    
+    // buffer is now {0xCD, 0x56, 0x78, 0x34}
+    Endn::Little::SET_UINT16(buffer, 1, 0x5678); 
+    
+    std::size_t length = 0;
+    
+    // buffer is now {0xCD, 0x56, 0x12, 0x34}
+    // length is now 2
+    Endn::Big::SET_UINT16(buffer, 2, 0x1234, length); 
+}
+```
+
+To read array it is possible to memcpy from buffer to a host buffer with `MEMCPY_<SIZE>` functions.
+
+### Code depending on host endianess
+
+When linking with LibEndian, an useful defined value can be used: `ENDN_IS_BIG_ENDIAN`. This give information about the executing host. In your code you can do thing like:
+
+```c++
+#ifdef ENDN_IS_BIG_ENDIAN
+// Big endian code
+#else
+// Little endian code
+#endif
+```
 
 ## Build with CMake
 
-The CMake can build the library either as a static or a shared library. It can also generate a doxygen website.
+**Endn** is an INTERFACE library, this mean it won't be build into a library, but carry dependencies of include, and define. Add it to your cmake project by using `add_subdirectory` or by using the `FetchContent` feature.
 
-```
-git clone https://github.com/OlivierLDff/LibEndian
-cd LibEndian && mkdir build && cd build
-cmake -DLIBENDIAN_USE_NAMESPACE=ON -DLIBENDIAN_BUILD_DOC=ON ..
-make -j16
+```cmake
+# ...
+include(FetchContent)
+FetchContent_Declare(
+    Endn
+    GIT_REPOSITORY "https://github.com/OlivierLDff/Endn"
+    GIT_TAG        "master"
+)
+# ...
+FetchContent_MakeAvailable(Endn)
+# ...
+
+target_link_libraries(MyTarget Endn)
 ```
 
 ### Input
 
-- **LIBENDIAN_TARGET** : Name of the library target. *Default : "LibEndian"*
-- **LIBENDIAN_PROJECT** : Name of the project. *Default : "LibEndian"*
-- **LIBENDIAN_BUILD_SHARED** : Build shared library [ON OFF]. *Default: OFF.*
-- **LIBENDIAN_BUILD_STATIC** : Build static library [ON OFF]. *Default: ON.*
-- **LIBENDIAN_USE_NAMESPACE** : If the library compile with a namespace [ON OFF]. *Default: ON.*
-- **LIBENDIAN_NAMESPACE** : Namespace for the library. Only relevant if LIBENDIAN_USE_NAMESPACE is ON. *Default: "Endn".*
-- **LIBENDIAN_BUILD_DOC** : Build the LibEndian Doc [ON OFF]. *Default: OFF.*
-
-### Dependencies
-
-- **LIBENDIAN_DOXYGEN_BT_REPOSITORY** : Repository of DoxygenBt. *Default : "https://github.com/OlivierLDff/DoxygenBootstrapped.git"*
-- **LIBENDIAN_DOXYGEN_BT_TAG** : Git Tag of DoxygenBt. *Default : "v1.3.2"*
+- **ENDN_TARGET** : Name of the library target. *Default : "LibEndian"*
+- **ENDN_PROJECT** : Name of the project. *Default : "LibEndian"*
+- **ENDN_ENABLE_BSWAP**: Enable build in swap function if available. *Default: ON*.
 
 ### Output
 
-- **LIBENDIAN_TARGET** : Output target to link to.
-- **LIBENDIAN_VERSION** : Current version of the library
-
-### Integration with CMake project
-
-The main goal of this CMake project is to big included into another CMake project.
-```cmake
-SET( LIBENDIAN_TARGET LibEndian )
-SET( LIBENDIAN_PROJECT LibEndian )
-SET( LIBENDIAN_BUILD_SHARED OFF )
-SET( LIBENDIAN_BUILD_STATIC ON )
-SET( LIBENDIAN_BUILD_DOC OFF )
-ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/path/to/LibEndian ${CMAKE_CURRENT_BINARY_DIR}/LibEndian_Build)
-```
-It is also possible to download the repository with the scripts inside `cmake/`. folder Simply call `BuildLibEndian.cmake`.
-
-You will need:
-
-* `DownloadProject.cmake`
-* `DownloadProject.CMakeLists.cmake.in`
-* `BuildLibEndian.cmake`
-
-```cmake
-SET( LIBENDIAN_TARGET LibEndian )
-SET( LIBENDIAN_PROJECT LibEndian )
-SET( LIBENDIAN_BUILD_SHARED OFF )
-SET( LIBENDIAN_BUILD_STATIC ON )
-SET( LIBENDIAN_BUILD_DOC OFF )
-SET( LIBENDIAN_USE_NAMESPACE ON )
-SET( LIBENDIAN_REPOSITORY "https://github.com/OlivierLDff/LibEndian.git" )
-SET( LIBENDIAN_TAG v1.0.2 )
-INCLUDE(path/to/BuildLibEndian.cmake)
-```
+- **ENDN_TARGET** : Output target to link to.
+- **ENDN_VERSION** : Current version of the library
 
 ## Revisions
 
 * **1.0.0** : Initial work
 	* **1.0.1** : Fix CMakeLists status
 	* **1.0.2** : Fix CMakeLists file name
+* **v1.2.0** : Hard fork of libendian
+  * Drop support for class, to use namespace instead.
+  * Use `std` types instead of `c` types for `*int*`.
+  * Library is now an `INTERFACE` instead of a binary library.
