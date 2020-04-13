@@ -1,5 +1,5 @@
-#ifndef __ENDIAN_HELPERS_HPP__
-#define __ENDIAN_HELPERS_HPP__
+#ifndef __ENDN_HELPERS_HPP__
+#define __ENDN_HELPERS_HPP__
 
 #ifdef _MSC_VER
 
