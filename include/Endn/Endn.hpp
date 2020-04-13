@@ -36,15 +36,15 @@ static const std::uint8_t FLOAT32_SIZE = 4;
 /** Size of double variable (8 bytes) */
 static const std::uint8_t FLOAT64_SIZE = 8;
 
-bool IS_16_ALIGNED(const uintptr_t ptr) { return ptr % 2 == 0; }
-bool IS_32_ALIGNED(const uintptr_t ptr) { return ptr % 4 == 0; }
-bool IS_64_ALIGNED(const uintptr_t ptr) { return ptr % 8 == 0; }
+inline bool IS_16_ALIGNED(const std::uintptr_t ptr) { return ptr % 2 == 0; }
+inline bool IS_32_ALIGNED(const std::uintptr_t ptr) { return ptr % 4 == 0; }
+inline bool IS_64_ALIGNED(const std::uintptr_t ptr) { return ptr % 8 == 0; }
 
-bool IS_16_ALIGNED(const std::uint8_t* ptr) { return IS_16_ALIGNED(uintptr_t(ptr)); }
-bool IS_32_ALIGNED(const std::uint8_t* ptr) { return IS_32_ALIGNED(uintptr_t(ptr)); }
-bool IS_64_ALIGNED(const std::uint8_t* ptr) { return IS_64_ALIGNED(uintptr_t(ptr)); }
+inline bool IS_16_ALIGNED(const std::uint8_t* ptr) { return IS_16_ALIGNED(std::uintptr_t(ptr)); }
+inline bool IS_32_ALIGNED(const std::uint8_t* ptr) { return IS_32_ALIGNED(std::uintptr_t(ptr)); }
+inline bool IS_64_ALIGNED(const std::uint8_t* ptr) { return IS_64_ALIGNED(std::uintptr_t(ptr)); }
 
-bool OVERLAP(const uintptr_t ptr1, const uintptr_t ptr2, const uint64_t count)
+inline bool OVERLAP(const std::uintptr_t ptr1, const std::uintptr_t ptr2, const std::uint64_t count)
 {
     return (ptr1 <= ptr2 && ptr1 + count > ptr2) ||
            (ptr2 <= ptr1 && ptr2 + count > ptr1);

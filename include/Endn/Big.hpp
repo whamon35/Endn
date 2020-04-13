@@ -34,7 +34,7 @@ namespace Big {
  * \param buf Pointer to the std::uint8_t
  * \return The deserialized data
  */
-std::uint8_t GET_UINT8(const std::uint8_t* buf)
+inline std::uint8_t GET_UINT8(const std::uint8_t* buf)
 {
     return ((std::uint8_t)buf[0]);
 }
@@ -44,7 +44,7 @@ std::uint8_t GET_UINT8(const std::uint8_t* buf)
  * \param buf Pointer to the std::uint16_t
  * \return The deserialized data
  */
-std::uint16_t GET_UINT16(const std::uint8_t* buf)
+inline std::uint16_t GET_UINT16(const std::uint8_t* buf)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -64,7 +64,7 @@ std::uint16_t GET_UINT16(const std::uint8_t* buf)
  * \param buf Pointer to the std::uint32_t
  * \return The deserialized data
  */
-std::uint32_t GET_UINT32(const std::uint8_t* buf)
+inline std::uint32_t GET_UINT32(const std::uint8_t* buf)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -87,7 +87,7 @@ std::uint32_t GET_UINT32(const std::uint8_t* buf)
  * \param buf Pointer to the std::uint48_t
  * \return The deserialized data
  */
-std::uint64_t GET_UINT48(const std::uint8_t* buf)
+inline std::uint64_t GET_UINT48(const std::uint8_t* buf)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -111,7 +111,7 @@ std::uint64_t GET_UINT48(const std::uint8_t* buf)
  * \param buf Pointer to the std::uint64_t
  * \return The deserialized data
  */
-std::uint64_t GET_UINT64(const std::uint8_t* buf)
+inline std::uint64_t GET_UINT64(const std::uint8_t* buf)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -137,7 +137,7 @@ std::uint64_t GET_UINT64(const std::uint8_t* buf)
  * \param buf Pointer to the int8_t
  * \return The deserialized data
  */
-int8_t GET_INT8(const std::uint8_t* buf)
+inline int8_t GET_INT8(const std::uint8_t* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int8_t*)(&value);
@@ -148,7 +148,7 @@ int8_t GET_INT8(const std::uint8_t* buf)
  * \param buf Pointer to the int16_t
  * \return The deserialized data
  */
-int16_t GET_INT16(const std::uint8_t* buf)
+inline int16_t GET_INT16(const std::uint8_t* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int16_t*)(&value);
@@ -159,7 +159,7 @@ int16_t GET_INT16(const std::uint8_t* buf)
  * \param buf Pointer to the int32_t
  * \return The deserialized data
  */
-int32_t GET_INT32(const std::uint8_t* buf)
+inline int32_t GET_INT32(const std::uint8_t* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int32_t*)(&value);
@@ -171,7 +171,7 @@ int32_t GET_INT32(const std::uint8_t* buf)
  * \param buf Pointer to the std::uint48_t
  * \return The deserialized data
  */
-int64_t GET_INT48(const std::uint8_t* buf)
+inline int64_t GET_INT48(const std::uint8_t* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int64_t*)(&value);
@@ -182,7 +182,7 @@ int64_t GET_INT48(const std::uint8_t* buf)
  * \param buf Pointer to the int64_t
  * \return The deserialized data
  */
-int64_t GET_INT64(const std::uint8_t* buf)
+inline int64_t GET_INT64(const std::uint8_t* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int64_t*)(&value);
@@ -193,7 +193,7 @@ int64_t GET_INT64(const std::uint8_t* buf)
  * \param buf Pointer to the float
  * \return The deserialized data
  */
-float GET_FLOAT32(const std::uint8_t* buf)
+inline float GET_FLOAT32(const std::uint8_t* buf)
 {
     const std::uint32_t value = GET_UINT32(buf);
     return *(float*)(&value);
@@ -204,7 +204,7 @@ float GET_FLOAT32(const std::uint8_t* buf)
  * \param buf Pointer to the double
  * \return The deserialized data
  */
-double GET_FLOAT64(const std::uint8_t* buf)
+inline double GET_FLOAT64(const std::uint8_t* buf)
 {
     const std::uint64_t value = GET_UINT64(buf);
     return *(double*)(&value);
@@ -216,7 +216,7 @@ double GET_FLOAT64(const std::uint8_t* buf)
  * \param offset Offset in the buffer to access to an std::uint8_t* (in bytes)
  * \return The deserialized data
  */
-std::uint8_t GET_UINT8(const std::uint8_t* buf, const std::size_t offset)   { return GET_UINT8(&buf[offset]); }
+inline std::uint8_t GET_UINT8(const std::uint8_t* buf, const std::size_t offset)   { return GET_UINT8(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint16_t from buffer
@@ -224,7 +224,7 @@ std::uint8_t GET_UINT8(const std::uint8_t* buf, const std::size_t offset)   { re
  * \param offset Offset in the buffer to access to an std::uint16_t* (in bytes)
  * \return The deserialized data
  */
-std::uint16_t GET_UINT16(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT16(&buf[offset]); }
+inline std::uint16_t GET_UINT16(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT16(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint32_t from buffer
@@ -232,7 +232,7 @@ std::uint16_t GET_UINT16(const std::uint8_t* buf, const std::size_t offset) { re
  * \param offset Offset in the buffer to access to an std::uint32_t* (in bytes)
  * \return The deserialized data
  */
-std::uint32_t GET_UINT32(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT32(&buf[offset]); }
+inline std::uint32_t GET_UINT32(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint48_t from buffer
@@ -241,7 +241,7 @@ std::uint32_t GET_UINT32(const std::uint8_t* buf, const std::size_t offset) { re
  * \note Store in a std::uint64_t for convenience
  * \return The deserialized data
  */
-std::uint64_t GET_UINT48(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT48(&buf[offset]); }
+inline std::uint64_t GET_UINT48(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT48(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint64_t from buffer
@@ -249,7 +249,7 @@ std::uint64_t GET_UINT48(const std::uint8_t* buf, const std::size_t offset) { re
  * \param offset Offset in the buffer to access to an std::uint64_t* (in bytes)
  * \return The deserialized data
  */
-std::uint64_t GET_UINT64(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT64(&buf[offset]); }
+inline std::uint64_t GET_UINT64(const std::uint8_t* buf, const std::size_t offset) { return GET_UINT64(&buf[offset]); }
 
 /**
  * \brief Deserialize an int8_t from buffer
@@ -257,7 +257,7 @@ std::uint64_t GET_UINT64(const std::uint8_t* buf, const std::size_t offset) { re
  * \param offset Offset in the buffer to access to an int8_t* (in bytes)
  * \return The deserialized data
  */
-int8_t GET_INT8(const std::uint8_t* buf, const std::size_t offset)   { return GET_INT8(&buf[offset]); }
+inline int8_t GET_INT8(const std::uint8_t* buf, const std::size_t offset)   { return GET_INT8(&buf[offset]); }
 
 /**
  * \brief Deserialize an int16_t from buffer
@@ -265,7 +265,7 @@ int8_t GET_INT8(const std::uint8_t* buf, const std::size_t offset)   { return GE
  * \param offset Offset in the buffer to access to an int16_t* (in bytes)
  * \return The deserialized data
  */
-int16_t GET_INT16(const std::uint8_t* buf, const std::size_t offset) { return GET_INT16(&buf[offset]); }
+inline int16_t GET_INT16(const std::uint8_t* buf, const std::size_t offset) { return GET_INT16(&buf[offset]); }
 
 /**
  * \brief Deserialize an int32_t from buffer
@@ -273,7 +273,7 @@ int16_t GET_INT16(const std::uint8_t* buf, const std::size_t offset) { return GE
  * \param offset Offset in the buffer to access to an int32_t* (in bytes)
  * \return The deserialized data
  */
-int32_t GET_INT32(const std::uint8_t* buf, const std::size_t offset) { return GET_INT32(&buf[offset]); }
+inline int32_t GET_INT32(const std::uint8_t* buf, const std::size_t offset) { return GET_INT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an int48_t from buffer
@@ -282,7 +282,7 @@ int32_t GET_INT32(const std::uint8_t* buf, const std::size_t offset) { return GE
  * \note Store in a int64_t for convenience
  * \return The deserialized data
  */
-int64_t GET_INT48(const std::uint8_t* buf, const std::size_t offset) { return GET_INT48(&buf[offset]); }
+inline int64_t GET_INT48(const std::uint8_t* buf, const std::size_t offset) { return GET_INT48(&buf[offset]); }
 
 /**
  * \brief Deserialize an int64_t from buffer
@@ -290,7 +290,7 @@ int64_t GET_INT48(const std::uint8_t* buf, const std::size_t offset) { return GE
  * \param offset Offset in the buffer to access to an int64_t* (in bytes)
  * \return The deserialized data
  */
-int64_t GET_INT64(const std::uint8_t* buf, const std::size_t offset) { return GET_INT64(&buf[offset]); }
+inline int64_t GET_INT64(const std::uint8_t* buf, const std::size_t offset) { return GET_INT64(&buf[offset]); }
 
 /**
  * \brief Deserialize an float from buffer
@@ -298,7 +298,7 @@ int64_t GET_INT64(const std::uint8_t* buf, const std::size_t offset) { return GE
  * \param offset Offset in the buffer to access to an float* (in bytes)
  * \return The deserialized data
  */
-float GET_FLOAT32(const std::uint8_t* buf, const std::size_t offset) { return GET_FLOAT32(&buf[offset]); }
+inline float GET_FLOAT32(const std::uint8_t* buf, const std::size_t offset) { return GET_FLOAT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an double from buffer
@@ -306,14 +306,14 @@ float GET_FLOAT32(const std::uint8_t* buf, const std::size_t offset) { return GE
  * \param offset Offset in the buffer to access to an double  (in bytes)
  * \return The deserialized data
  */
-double GET_FLOAT64(const std::uint8_t* buf, const std::size_t offset) { return GET_FLOAT64(&buf[offset]); }
+inline double GET_FLOAT64(const std::uint8_t* buf, const std::size_t offset) { return GET_FLOAT64(&buf[offset]); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT8(std::uint8_t* buf, const std::uint8_t val)
+inline void SET_UINT8(std::uint8_t* buf, const std::uint8_t val)
 {
     buf[0] = (std::uint8_t)(val & 0xFF);
 }
@@ -323,7 +323,7 @@ void SET_UINT8(std::uint8_t* buf, const std::uint8_t val)
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT16(std::uint8_t* buf, const std::uint16_t val)
+inline void SET_UINT16(std::uint8_t* buf, const std::uint16_t val)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -349,7 +349,7 @@ void SET_UINT16(std::uint8_t* buf, const std::uint16_t val)
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT32(std::uint8_t* buf, const std::uint32_t val)
+inline void SET_UINT32(std::uint8_t* buf, const std::uint32_t val)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -378,7 +378,7 @@ void SET_UINT32(std::uint8_t* buf, const std::uint32_t val)
  * \param val Value to serialize
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  */
-void SET_UINT48(std::uint8_t* buf, const std::uint64_t val)
+inline void SET_UINT48(std::uint8_t* buf, const std::uint64_t val)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -408,7 +408,7 @@ void SET_UINT48(std::uint8_t* buf, const std::uint64_t val)
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT64(std::uint8_t* buf, const std::uint64_t val)
+inline void SET_UINT64(std::uint8_t* buf, const std::uint64_t val)
 {
     #ifdef ENDN_ENABLE_BSWAP
       #ifdef ENDN_IS_BIG_ENDIAN
@@ -441,21 +441,21 @@ void SET_UINT64(std::uint8_t* buf, const std::uint64_t val)
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT8(std::uint8_t* buf, const int8_t val) { SET_UINT8(buf, *(const std::uint8_t*)&val); }
+inline void SET_INT8(std::uint8_t* buf, const int8_t val) { SET_UINT8(buf, *(const std::uint8_t*)&val); }
 
 /**
  * \brief Serialize a int16_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT16(std::uint8_t* buf, const int16_t val) { SET_UINT16(buf, *(const std::uint16_t*)&val); }
+inline void SET_INT16(std::uint8_t* buf, const int16_t val) { SET_UINT16(buf, *(const std::uint16_t*)&val); }
 
 /**
  * \brief Serialize a int32_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT32(std::uint8_t* buf, const int32_t val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
+inline void SET_INT32(std::uint8_t* buf, const int32_t val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
 
 /**
  * \brief Serialize a int48 in the buffer
@@ -463,28 +463,28 @@ void SET_INT32(std::uint8_t* buf, const int32_t val) { SET_UINT32(buf, *(const s
  * \param val Value to serialize
  * \note For convenience the int48 is stored into a int64_t
  */
-void SET_INT48(std::uint8_t* buf, const int64_t val) { SET_UINT48(buf, *(const std::uint64_t*)&val); }
+inline void SET_INT48(std::uint8_t* buf, const int64_t val) { SET_UINT48(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a int64_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT64(std::uint8_t* buf, const int64_t val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
+inline void SET_INT64(std::uint8_t* buf, const int64_t val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a float in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_FLOAT32(std::uint8_t* buf, const float val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
+inline void SET_FLOAT32(std::uint8_t* buf, const float val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
 
 /**
  * \brief Serialize a double in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_FLOAT64(std::uint8_t* buf, const double val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
+inline void SET_FLOAT64(std::uint8_t* buf, const double val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
@@ -492,7 +492,7 @@ void SET_FLOAT64(std::uint8_t* buf, const double val) { SET_UINT64(buf, *(const 
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t val) { SET_UINT8(&buf[offset], val); }
+inline void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t val) { SET_UINT8(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint16_t in the buffer
@@ -500,7 +500,7 @@ void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t v
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t val) { SET_UINT16(&buf[offset], val); }
+inline void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t val) { SET_UINT16(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint32_t in the buffer
@@ -508,7 +508,7 @@ void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t val) { SET_UINT32(&buf[offset], val); }
+inline void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t val) { SET_UINT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint48_t in the buffer
@@ -517,7 +517,7 @@ void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t
  * \param val Value to serialize
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  */
-void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT48(&buf[offset], val); }
+inline void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT48(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint64_t in the buffer
@@ -525,7 +525,7 @@ void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT64(&buf[offset], val); }
+inline void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a int8_t in the buffer
@@ -533,7 +533,7 @@ void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val) { SET_INT8(&buf[offset], val); }
+inline void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val) { SET_INT8(&buf[offset], val); }
 
 /**
  * \brief Serialize a int16_t in the buffer
@@ -541,7 +541,7 @@ void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val) { S
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val) { SET_INT16(&buf[offset], val); }
+inline void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val) { SET_INT16(&buf[offset], val); }
 
 /**
  * \brief Serialize a int32_t in the buffer
@@ -549,7 +549,7 @@ void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val) {
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val) { SET_INT32(&buf[offset], val); }
+inline void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val) { SET_INT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a int48_t in the buffer
@@ -558,7 +558,7 @@ void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val) {
  * \param val Value to serialize
  * \note For convenience the int48 is stored into a int64_t
  */
-void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val) { SET_INT48(&buf[offset], val); }
+inline void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val) { SET_INT48(&buf[offset], val); }
 
 /**
  * \brief Serialize a int64_t in the buffer
@@ -566,7 +566,7 @@ void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val) {
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val) { SET_INT64(&buf[offset], val); }
+inline void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val) { SET_INT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a float in the buffer
@@ -574,7 +574,7 @@ void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val) {
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val) { SET_FLOAT32(&buf[offset], val); }
+inline void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val) { SET_FLOAT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a double in the buffer
@@ -582,7 +582,7 @@ void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val) {
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val) { SET_FLOAT64(&buf[offset], val); }
+inline void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val) { SET_FLOAT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
@@ -591,7 +591,7 @@ void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val) 
  * \param length Auto Increment this variable by the size of std::uint8_t
  * \param val Value to serialize
  */
-void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t val, std::size_t& length) { SET_UINT8(buf, offset, val); length += UINT8_SIZE; }
+inline void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t val, std::size_t& length) { SET_UINT8(buf, offset, val); length += UINT8_SIZE; }
 
 /**
  * \brief Serialize a std::uint16_t in the buffer
@@ -600,7 +600,7 @@ void SET_UINT8(std::uint8_t* buf, const std::size_t offset, const std::uint8_t v
  * \param length Auto Increment this variable by the size of std::uint16_t
  * \param val Value to serialize
  */
-void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t val, std::size_t& length) { SET_UINT16(buf, offset, val); length += UINT16_SIZE; }
+inline void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t val, std::size_t& length) { SET_UINT16(buf, offset, val); length += UINT16_SIZE; }
 
 /**
  * \brief Serialize a std::uint32_t in the buffer
@@ -609,7 +609,7 @@ void SET_UINT16(std::uint8_t* buf, const std::size_t offset, const std::uint16_t
  * \param length Auto Increment this variable by the size of std::uint32_t
  * \param val Value to serialize
  */
-void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t val, std::size_t& length) { SET_UINT32(buf, offset, val); length += UINT32_SIZE; }
+inline void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t val, std::size_t& length) { SET_UINT32(buf, offset, val); length += UINT32_SIZE; }
 
 /**
  * \brief Serialize a std::uint48_t in the buffer
@@ -619,7 +619,7 @@ void SET_UINT32(std::uint8_t* buf, const std::size_t offset, const std::uint32_t
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  * \param val Value to serialize
  */
-void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT48(buf, offset, val); length += UINT48_SIZE; }
+inline void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT48(buf, offset, val); length += UINT48_SIZE; }
 
 /**
  * \brief Serialize a std::uint64_t in the buffer
@@ -628,7 +628,7 @@ void SET_UINT48(std::uint8_t* buf, const std::size_t offset, const std::uint64_t
  * \param length Auto Increment this variable by the size of std::uint64_t
  * \param val Value to serialize
  */
-void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT64(buf, offset, val); length += UINT64_SIZE; }
+inline void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT64(buf, offset, val); length += UINT64_SIZE; }
 
 /**
  * \brief Serialize a int8_t in the buffer
@@ -637,7 +637,7 @@ void SET_UINT64(std::uint8_t* buf, const std::size_t offset, const std::uint64_t
  * \param length Auto Increment this variable by the size of int8_t
  * \param val Value to serialize
  */
-void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val, std::size_t& length) { SET_INT8(buf, offset, val); length += INT8_SIZE; }
+inline void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val, std::size_t& length) { SET_INT8(buf, offset, val); length += INT8_SIZE; }
 
 /**
  * \brief Serialize a int16_t in the buffer
@@ -646,7 +646,7 @@ void SET_INT8(std::uint8_t* buf, const std::size_t offset, const int8_t val, std
  * \param length Auto Increment this variable by the size of int16_t
  * \param val Value to serialize
  */
-void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val, std::size_t& length) { SET_INT16(buf, offset, val); length += INT16_SIZE; }
+inline void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val, std::size_t& length) { SET_INT16(buf, offset, val); length += INT16_SIZE; }
 
 /**
  * \brief Serialize a int32_t in the buffer
@@ -655,7 +655,7 @@ void SET_INT16(std::uint8_t* buf, const std::size_t offset, const int16_t val, s
  * \param length Auto Increment this variable by the size of int32_t
  * \param val Value to serialize
  */
-void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val, std::size_t& length) { SET_INT32(buf, offset, val); length += INT32_SIZE; }
+inline void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val, std::size_t& length) { SET_INT32(buf, offset, val); length += INT32_SIZE; }
 
 /**
  * \brief Serialize a int48_t in the buffer
@@ -665,7 +665,7 @@ void SET_INT32(std::uint8_t* buf, const std::size_t offset, const int32_t val, s
  * \note For convenience the int48 is stored into a int64_t
  * \param val Value to serialize
  */
-void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT48(buf, offset, val); length += INT48_SIZE; }
+inline void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT48(buf, offset, val); length += INT48_SIZE; }
 
 /**
  * \brief Serialize a int64_t in the buffer
@@ -674,7 +674,7 @@ void SET_INT48(std::uint8_t* buf, const std::size_t offset, const int64_t val, s
  * \param length Auto Increment this variable by the size of int64_t
  * \param val Value to serialize
  */
-void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT64(buf, offset, val); length += INT64_SIZE; }
+inline void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT64(buf, offset, val); length += INT64_SIZE; }
 
 /**
  * \brief Serialize a float in the buffer
@@ -683,7 +683,7 @@ void SET_INT64(std::uint8_t* buf, const std::size_t offset, const int64_t val, s
  * \param length Auto Increment this variable by the size of float
  * \param val Value to serialize
  */
-void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val, std::size_t& length) { SET_FLOAT32(buf, offset, val); length += UINT32_SIZE; }
+inline void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val, std::size_t& length) { SET_FLOAT32(buf, offset, val); length += UINT32_SIZE; }
 
 /**
  * \brief Serialize a double in the buffer
@@ -692,7 +692,7 @@ void SET_FLOAT32(std::uint8_t* buf, const std::size_t offset, const float val, s
  * \param length Auto Increment this variable by the size of double
  * \param val Value to serialize
  */
-void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val, std::size_t& length) { SET_FLOAT64(buf, offset, val); length += UINT64_SIZE; }
+inline void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val, std::size_t& length) { SET_FLOAT64(buf, offset, val); length += UINT64_SIZE; }
 
 /**
  * \brief memcpy from a big endian 16 bits to a local buffer
@@ -700,7 +700,7 @@ void SET_FLOAT64(std::uint8_t* buf, const std::size_t offset, const double val, 
  * \param src ptr to big endian buffer of std::uint16_t that need to be deserialized in dest
  * \param count Number of std::uint16_t in src
  */
-void MEMCPY_UINT16(std::uint16_t* dest, const std::uint8_t* src, const std::size_t count)
+inline void MEMCPY_UINT16(std::uint16_t* dest, const std::uint8_t* src, const std::size_t count)
 {
     #ifndef ENDN_IS_BIG_ENDIAN
     if(IS_16_ALIGNED(src))
@@ -722,7 +722,7 @@ void MEMCPY_UINT16(std::uint16_t* dest, const std::uint8_t* src, const std::size
  * \param src ptr to big endian buffer of std::uint32_t that need to be deserialized in dest
  * \param count Number of std::uint32_t in src
  */
-void MEMCPY_UINT32(std::uint32_t* dest, const std::uint8_t* src, const std::size_t count)
+inline void MEMCPY_UINT32(std::uint32_t* dest, const std::uint8_t* src, const std::size_t count)
 {
     #ifndef ENDN_IS_BIG_ENDIAN
     if(IS_32_ALIGNED(src))
@@ -744,7 +744,7 @@ void MEMCPY_UINT32(std::uint32_t* dest, const std::uint8_t* src, const std::size
  * \param src ptr to big endian buffer of std::uint64_t that need to be deserialized in dest
  * \param count Number of std::uint64_t in src
  */
-void MEMCPY_UINT64(std::uint64_t* dest, const std::uint8_t* src, const std::size_t count)
+inline void MEMCPY_UINT64(std::uint64_t* dest, const std::uint8_t* src, const std::size_t count)
 {
     #ifndef ENDN_IS_BIG_ENDIAN
     if(IS_64_ALIGNED(src))
@@ -765,21 +765,21 @@ void MEMCPY_UINT64(std::uint64_t* dest, const std::uint8_t* src, const std::size
  * \param buf Pointer to the std::uint8_t
  * \return The deserialized data
  */
-std::uint8_t GET_UINT8(const char* buf) { return GET_UINT8((const std::uint8_t*)buf); }
+inline std::uint8_t GET_UINT8(const char* buf) { return GET_UINT8((const std::uint8_t*)buf); }
 
 /**
  * \brief Deserialize an std::uint16_t from buffer
  * \param buf Pointer to the std::uint16_t
  * \return The deserialized data
  */
-std::uint16_t GET_UINT16(const char* buf) { return GET_UINT16((const std::uint8_t*)buf); }
+inline std::uint16_t GET_UINT16(const char* buf) { return GET_UINT16((const std::uint8_t*)buf); }
 
 /**
  * \brief Deserialize an std::uint32_t from buffer
  * \param buf Pointer to the std::uint32_t
  * \return The deserialized data
  */
-std::uint32_t GET_UINT32(const char* buf) { return GET_UINT32((const std::uint8_t*)buf); }
+inline std::uint32_t GET_UINT32(const char* buf) { return GET_UINT32((const std::uint8_t*)buf); }
 
 /**
  * \brief Deserialize an std::uint48_t from buffer.
@@ -787,21 +787,21 @@ std::uint32_t GET_UINT32(const char* buf) { return GET_UINT32((const std::uint8_
  * \param buf Pointer to the std::uint48_t
  * \return The deserialized data
  */
-std::uint64_t GET_UINT48(const char* buf) { return GET_UINT48((const std::uint8_t*)buf); }
+inline std::uint64_t GET_UINT48(const char* buf) { return GET_UINT48((const std::uint8_t*)buf); }
 
 /**
  * \brief Deserialize an std::uint64_t from buffer
  * \param buf Pointer to the std::uint64_t
  * \return The deserialized data
  */
-std::uint64_t GET_UINT64(const char* buf) { return GET_UINT64((const std::uint8_t*)buf); }
+inline std::uint64_t GET_UINT64(const char* buf) { return GET_UINT64((const std::uint8_t*)buf); }
 
 /**
  * \brief Deserialize an int8_t from buffer
  * \param buf Pointer to the int8_t
  * \return The deserialized data
  */
-int8_t GET_INT8(const char* buf)
+inline int8_t GET_INT8(const char* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int8_t*)(&value);
@@ -812,7 +812,7 @@ int8_t GET_INT8(const char* buf)
  * \param buf Pointer to the int16_t
  * \return The deserialized data
  */
-int16_t GET_INT16(const char* buf)
+inline int16_t GET_INT16(const char* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int16_t*)(&value);
@@ -823,7 +823,7 @@ int16_t GET_INT16(const char* buf)
  * \param buf Pointer to the int32_t
  * \return The deserialized data
  */
-int32_t GET_INT32(const char* buf)
+inline int32_t GET_INT32(const char* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int32_t*)(&value);
@@ -835,7 +835,7 @@ int32_t GET_INT32(const char* buf)
  * \param buf Pointer to the std::uint48_t
  * \return The deserialized data
  */
-int64_t GET_INT48(const char* buf)
+inline int64_t GET_INT48(const char* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int64_t*)(&value);
@@ -846,7 +846,7 @@ int64_t GET_INT48(const char* buf)
  * \param buf Pointer to the int64_t
  * \return The deserialized data
  */
-int64_t GET_INT64(const char* buf)
+inline int64_t GET_INT64(const char* buf)
 {
     const std::uint8_t value = GET_UINT8(buf);
     return *(int64_t*)(&value);
@@ -857,7 +857,7 @@ int64_t GET_INT64(const char* buf)
  * \param buf Pointer to the float
  * \return The deserialized data
  */
-float GET_FLOAT32(const char* buf)
+inline float GET_FLOAT32(const char* buf)
 {
     const std::uint32_t value = GET_UINT32(buf);
     return *(float*)(&value);
@@ -868,7 +868,7 @@ float GET_FLOAT32(const char* buf)
  * \param buf Pointer to the double
  * \return The deserialized data
  */
-double GET_FLOAT64(const char* buf)
+inline double GET_FLOAT64(const char* buf)
 {
     const std::uint64_t value = GET_UINT64(buf);
     return *(double*)(&value);
@@ -880,7 +880,7 @@ double GET_FLOAT64(const char* buf)
  * \param offset Offset in the buffer to access to an std::uint8_t* (in bytes)
  * \return The deserialized data
  */
-std::uint8_t GET_UINT8(const char* buf, const std::size_t offset)   { return GET_UINT8(&buf[offset]); }
+inline std::uint8_t GET_UINT8(const char* buf, const std::size_t offset)   { return GET_UINT8(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint16_t from buffer
@@ -888,7 +888,7 @@ std::uint8_t GET_UINT8(const char* buf, const std::size_t offset)   { return GET
  * \param offset Offset in the buffer to access to an std::uint16_t* (in bytes)
  * \return The deserialized data
  */
-std::uint16_t GET_UINT16(const char* buf, const std::size_t offset) { return GET_UINT16(&buf[offset]); }
+inline std::uint16_t GET_UINT16(const char* buf, const std::size_t offset) { return GET_UINT16(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint32_t from buffer
@@ -896,7 +896,7 @@ std::uint16_t GET_UINT16(const char* buf, const std::size_t offset) { return GET
  * \param offset Offset in the buffer to access to an std::uint32_t* (in bytes)
  * \return The deserialized data
  */
-std::uint32_t GET_UINT32(const char* buf, const std::size_t offset) { return GET_UINT32(&buf[offset]); }
+inline std::uint32_t GET_UINT32(const char* buf, const std::size_t offset) { return GET_UINT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint48_t from buffer
@@ -905,7 +905,7 @@ std::uint32_t GET_UINT32(const char* buf, const std::size_t offset) { return GET
  * \note Store in a std::uint64_t for convenience
  * \return The deserialized data
  */
-std::uint64_t GET_UINT48(const char* buf, const std::size_t offset) { return GET_UINT48(&buf[offset]); }
+inline std::uint64_t GET_UINT48(const char* buf, const std::size_t offset) { return GET_UINT48(&buf[offset]); }
 
 /**
  * \brief Deserialize an std::uint64_t from buffer
@@ -913,7 +913,7 @@ std::uint64_t GET_UINT48(const char* buf, const std::size_t offset) { return GET
  * \param offset Offset in the buffer to access to an std::uint64_t* (in bytes)
  * \return The deserialized data
  */
-std::uint64_t GET_UINT64(const char* buf, const std::size_t offset) { return GET_UINT64(&buf[offset]); }
+inline std::uint64_t GET_UINT64(const char* buf, const std::size_t offset) { return GET_UINT64(&buf[offset]); }
 
 /**
  * \brief Deserialize an int8_t from buffer
@@ -921,7 +921,7 @@ std::uint64_t GET_UINT64(const char* buf, const std::size_t offset) { return GET
  * \param offset Offset in the buffer to access to an int8_t* (in bytes)
  * \return The deserialized data
  */
-int8_t GET_INT8(const char* buf, const std::size_t offset)   { return GET_INT8(&buf[offset]); }
+inline int8_t GET_INT8(const char* buf, const std::size_t offset)   { return GET_INT8(&buf[offset]); }
 
 /**
  * \brief Deserialize an int16_t from buffer
@@ -929,7 +929,7 @@ int8_t GET_INT8(const char* buf, const std::size_t offset)   { return GET_INT8(&
  * \param offset Offset in the buffer to access to an int16_t* (in bytes)
  * \return The deserialized data
  */
-int16_t GET_INT16(const char* buf, const std::size_t offset) { return GET_INT16(&buf[offset]); }
+inline int16_t GET_INT16(const char* buf, const std::size_t offset) { return GET_INT16(&buf[offset]); }
 
 /**
  * \brief Deserialize an int32_t from buffer
@@ -937,7 +937,7 @@ int16_t GET_INT16(const char* buf, const std::size_t offset) { return GET_INT16(
  * \param offset Offset in the buffer to access to an int32_t* (in bytes)
  * \return The deserialized data
  */
-int32_t GET_INT32(const char* buf, const std::size_t offset) { return GET_INT32(&buf[offset]); }
+inline int32_t GET_INT32(const char* buf, const std::size_t offset) { return GET_INT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an int48_t from buffer
@@ -946,7 +946,7 @@ int32_t GET_INT32(const char* buf, const std::size_t offset) { return GET_INT32(
  * \note Store in a int64_t for convenience
  * \return The deserialized data
  */
-int64_t GET_INT48(const char* buf, const std::size_t offset) { return GET_INT48(&buf[offset]); }
+inline int64_t GET_INT48(const char* buf, const std::size_t offset) { return GET_INT48(&buf[offset]); }
 
 /**
  * \brief Deserialize an int64_t from buffer
@@ -954,7 +954,7 @@ int64_t GET_INT48(const char* buf, const std::size_t offset) { return GET_INT48(
  * \param offset Offset in the buffer to access to an int64_t* (in bytes)
  * \return The deserialized data
  */
-int64_t GET_INT64(const char* buf, const std::size_t offset) { return GET_INT64(&buf[offset]); }
+inline int64_t GET_INT64(const char* buf, const std::size_t offset) { return GET_INT64(&buf[offset]); }
 
 /**
  * \brief Deserialize an float from buffer
@@ -962,7 +962,7 @@ int64_t GET_INT64(const char* buf, const std::size_t offset) { return GET_INT64(
  * \param offset Offset in the buffer to access to an float* (in bytes)
  * \return The deserialized data
  */
-float GET_FLOAT32(const char* buf, const std::size_t offset) { return GET_FLOAT32(&buf[offset]); }
+inline float GET_FLOAT32(const char* buf, const std::size_t offset) { return GET_FLOAT32(&buf[offset]); }
 
 /**
  * \brief Deserialize an double from buffer
@@ -970,28 +970,28 @@ float GET_FLOAT32(const char* buf, const std::size_t offset) { return GET_FLOAT3
  * \param offset Offset in the buffer to access to an double  (in bytes)
  * \return The deserialized data
  */
-double GET_FLOAT64(const char* buf, const std::size_t offset) { return GET_FLOAT64(&buf[offset]); }
+inline double GET_FLOAT64(const char* buf, const std::size_t offset) { return GET_FLOAT64(&buf[offset]); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT8(char* buf, const std::uint8_t val) { SET_UINT8((std::uint8_t*)buf, *(const std::uint8_t*)&val); }
+inline void SET_UINT8(char* buf, const std::uint8_t val) { SET_UINT8((std::uint8_t*)buf, *(const std::uint8_t*)&val); }
 
 /**
  * \brief Serialize a std::uint16_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT16(char* buf, const std::uint16_t val) { SET_UINT16((std::uint8_t*)buf, *(const std::uint16_t*)&val); }
+inline void SET_UINT16(char* buf, const std::uint16_t val) { SET_UINT16((std::uint8_t*)buf, *(const std::uint16_t*)&val); }
 
 /**
  * \brief Serialize a std::uint32_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT32(char* buf, const std::uint32_t val) { SET_UINT32((std::uint8_t*)buf, *(const std::uint32_t*)&val); }
+inline void SET_UINT32(char* buf, const std::uint32_t val) { SET_UINT32((std::uint8_t*)buf, *(const std::uint32_t*)&val); }
 
 /**
  * \brief Serialize a std::uint48_t in the buffer
@@ -999,35 +999,35 @@ void SET_UINT32(char* buf, const std::uint32_t val) { SET_UINT32((std::uint8_t*)
  * \param val Value to serialize
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  */
-void SET_UINT48(char* buf, const std::uint64_t val) { SET_UINT48((std::uint8_t*)buf, *(const std::uint64_t*)&val); }
+inline void SET_UINT48(char* buf, const std::uint64_t val) { SET_UINT48((std::uint8_t*)buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a std::uint64_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_UINT64(char* buf, const std::uint64_t val) { SET_UINT64((std::uint8_t*)buf, *(const std::uint64_t*)&val); }
+inline void SET_UINT64(char* buf, const std::uint64_t val) { SET_UINT64((std::uint8_t*)buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a int8_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT8(char* buf, const int8_t val) { SET_UINT8(buf, *(const std::uint8_t*)&val); }
+inline void SET_INT8(char* buf, const int8_t val) { SET_UINT8(buf, *(const std::uint8_t*)&val); }
 
 /**
  * \brief Serialize a int16_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT16(char* buf, const int16_t val) { SET_UINT16(buf, *(const std::uint16_t*)&val); }
+inline void SET_INT16(char* buf, const int16_t val) { SET_UINT16(buf, *(const std::uint16_t*)&val); }
 
 /**
  * \brief Serialize a int32_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT32(char* buf, const int32_t val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
+inline void SET_INT32(char* buf, const int32_t val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
 
 /**
  * \brief Serialize a int48 in the buffer
@@ -1035,28 +1035,28 @@ void SET_INT32(char* buf, const int32_t val) { SET_UINT32(buf, *(const std::uint
  * \param val Value to serialize
  * \note For convenience the int48 is stored into a int64_t
  */
-void SET_INT48(char* buf, const int64_t val) { SET_UINT48(buf, *(const std::uint64_t*)&val); }
+inline void SET_INT48(char* buf, const int64_t val) { SET_UINT48(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a int64_t in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_INT64(char* buf, const int64_t val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
+inline void SET_INT64(char* buf, const int64_t val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a float in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_FLOAT32(char* buf, const float val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
+inline void SET_FLOAT32(char* buf, const float val) { SET_UINT32(buf, *(const std::uint32_t*)&val); }
 
 /**
  * \brief Serialize a double in the buffer
  * \param buf Pointer to the buffer
  * \param val Value to serialize
  */
-void SET_FLOAT64(char* buf, const double val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
+inline void SET_FLOAT64(char* buf, const double val) { SET_UINT64(buf, *(const std::uint64_t*)&val); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
@@ -1064,7 +1064,7 @@ void SET_FLOAT64(char* buf, const double val) { SET_UINT64(buf, *(const std::uin
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val) { SET_UINT8(&buf[offset], val); }
+inline void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val) { SET_UINT8(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint16_t in the buffer
@@ -1072,7 +1072,7 @@ void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val) { SE
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val) { SET_UINT16(&buf[offset], val); }
+inline void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val) { SET_UINT16(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint32_t in the buffer
@@ -1080,7 +1080,7 @@ void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val) { 
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val) { SET_UINT32(&buf[offset], val); }
+inline void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val) { SET_UINT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint48_t in the buffer
@@ -1089,7 +1089,7 @@ void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val) { 
  * \param val Value to serialize
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  */
-void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT48(&buf[offset], val); }
+inline void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT48(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint64_t in the buffer
@@ -1097,7 +1097,7 @@ void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val) { 
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT64(&buf[offset], val); }
+inline void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val) { SET_UINT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a int8_t in the buffer
@@ -1105,7 +1105,7 @@ void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val) { 
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT8(char* buf, const std::size_t offset, const int8_t val) { SET_INT8(&buf[offset], val); }
+inline void SET_INT8(char* buf, const std::size_t offset, const int8_t val) { SET_INT8(&buf[offset], val); }
 
 /**
  * \brief Serialize a int16_t in the buffer
@@ -1113,7 +1113,7 @@ void SET_INT8(char* buf, const std::size_t offset, const int8_t val) { SET_INT8(
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT16(char* buf, const std::size_t offset, const int16_t val) { SET_INT16(&buf[offset], val); }
+inline void SET_INT16(char* buf, const std::size_t offset, const int16_t val) { SET_INT16(&buf[offset], val); }
 
 /**
  * \brief Serialize a int32_t in the buffer
@@ -1121,7 +1121,7 @@ void SET_INT16(char* buf, const std::size_t offset, const int16_t val) { SET_INT
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT32(char* buf, const std::size_t offset, const int32_t val) { SET_INT32(&buf[offset], val); }
+inline void SET_INT32(char* buf, const std::size_t offset, const int32_t val) { SET_INT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a int48_t in the buffer
@@ -1130,7 +1130,7 @@ void SET_INT32(char* buf, const std::size_t offset, const int32_t val) { SET_INT
  * \param val Value to serialize
  * \note For convenience the int48 is stored into a int64_t
  */
-void SET_INT48(char* buf, const std::size_t offset, const int64_t val) { SET_INT48(&buf[offset], val); }
+inline void SET_INT48(char* buf, const std::size_t offset, const int64_t val) { SET_INT48(&buf[offset], val); }
 
 /**
  * \brief Serialize a int64_t in the buffer
@@ -1138,7 +1138,7 @@ void SET_INT48(char* buf, const std::size_t offset, const int64_t val) { SET_INT
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_INT64(char* buf, const std::size_t offset, const int64_t val) { SET_INT64(&buf[offset], val); }
+inline void SET_INT64(char* buf, const std::size_t offset, const int64_t val) { SET_INT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a float in the buffer
@@ -1146,7 +1146,7 @@ void SET_INT64(char* buf, const std::size_t offset, const int64_t val) { SET_INT
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_FLOAT32(char* buf, const std::size_t offset, const float val) { SET_FLOAT32(&buf[offset], val); }
+inline void SET_FLOAT32(char* buf, const std::size_t offset, const float val) { SET_FLOAT32(&buf[offset], val); }
 
 /**
  * \brief Serialize a double in the buffer
@@ -1154,7 +1154,7 @@ void SET_FLOAT32(char* buf, const std::size_t offset, const float val) { SET_FLO
  * \param offset Offset in the buffer (in bytes)
  * \param val Value to serialize
  */
-void SET_FLOAT64(char* buf, const std::size_t offset, const double val) { SET_FLOAT64(&buf[offset], val); }
+inline void SET_FLOAT64(char* buf, const std::size_t offset, const double val) { SET_FLOAT64(&buf[offset], val); }
 
 /**
  * \brief Serialize a std::uint8_t in the buffer
@@ -1163,7 +1163,7 @@ void SET_FLOAT64(char* buf, const std::size_t offset, const double val) { SET_FL
  * \param length Auto Increment this variable by the size of std::uint8_t
  * \param val Value to serialize
  */
-void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val, std::size_t& length) { SET_UINT8(buf, offset, val); length += UINT8_SIZE; }
+inline void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val, std::size_t& length) { SET_UINT8(buf, offset, val); length += UINT8_SIZE; }
 
 /**
  * \brief Serialize a std::uint16_t in the buffer
@@ -1172,7 +1172,7 @@ void SET_UINT8(char* buf, const std::size_t offset, const std::uint8_t val, std:
  * \param length Auto Increment this variable by the size of std::uint16_t
  * \param val Value to serialize
  */
-void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val, std::size_t& length) { SET_UINT16(buf, offset, val); length += UINT16_SIZE; }
+inline void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val, std::size_t& length) { SET_UINT16(buf, offset, val); length += UINT16_SIZE; }
 
 /**
  * \brief Serialize a std::uint32_t in the buffer
@@ -1181,7 +1181,7 @@ void SET_UINT16(char* buf, const std::size_t offset, const std::uint16_t val, st
  * \param length Auto Increment this variable by the size of std::uint32_t
  * \param val Value to serialize
  */
-void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val, std::size_t& length) { SET_UINT32(buf, offset, val); length += UINT32_SIZE; }
+inline void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val, std::size_t& length) { SET_UINT32(buf, offset, val); length += UINT32_SIZE; }
 
 /**
  * \brief Serialize a std::uint48_t in the buffer
@@ -1191,7 +1191,7 @@ void SET_UINT32(char* buf, const std::size_t offset, const std::uint32_t val, st
  * \note For convenience the std::uint48 is stored into a std::uint64_t
  * \param val Value to serialize
  */
-void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT48(buf, offset, val); length += UINT48_SIZE; }
+inline void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT48(buf, offset, val); length += UINT48_SIZE; }
 
 /**
  * \brief Serialize a std::uint64_t in the buffer
@@ -1200,7 +1200,7 @@ void SET_UINT48(char* buf, const std::size_t offset, const std::uint64_t val, st
  * \param length Auto Increment this variable by the size of std::uint64_t
  * \param val Value to serialize
  */
-void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT64(buf, offset, val); length += UINT64_SIZE; }
+inline void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val, std::size_t& length) { SET_UINT64(buf, offset, val); length += UINT64_SIZE; }
 
 /**
  * \brief Serialize a int8_t in the buffer
@@ -1209,7 +1209,7 @@ void SET_UINT64(char* buf, const std::size_t offset, const std::uint64_t val, st
  * \param length Auto Increment this variable by the size of int8_t
  * \param val Value to serialize
  */
-void SET_INT8(char* buf, const std::size_t offset, const int8_t val, std::size_t& length) { SET_INT8(buf, offset, val); length += INT8_SIZE; }
+inline void SET_INT8(char* buf, const std::size_t offset, const int8_t val, std::size_t& length) { SET_INT8(buf, offset, val); length += INT8_SIZE; }
 
 /**
  * \brief Serialize a int16_t in the buffer
@@ -1218,7 +1218,7 @@ void SET_INT8(char* buf, const std::size_t offset, const int8_t val, std::size_t
  * \param length Auto Increment this variable by the size of int16_t
  * \param val Value to serialize
  */
-void SET_INT16(char* buf, const std::size_t offset, const int16_t val, std::size_t& length) { SET_INT16(buf, offset, val); length += INT16_SIZE; }
+inline void SET_INT16(char* buf, const std::size_t offset, const int16_t val, std::size_t& length) { SET_INT16(buf, offset, val); length += INT16_SIZE; }
 
 /**
  * \brief Serialize a int32_t in the buffer
@@ -1227,7 +1227,7 @@ void SET_INT16(char* buf, const std::size_t offset, const int16_t val, std::size
  * \param length Auto Increment this variable by the size of int32_t
  * \param val Value to serialize
  */
-void SET_INT32(char* buf, const std::size_t offset, const int32_t val, std::size_t& length) { SET_INT32(buf, offset, val); length += INT32_SIZE; }
+inline void SET_INT32(char* buf, const std::size_t offset, const int32_t val, std::size_t& length) { SET_INT32(buf, offset, val); length += INT32_SIZE; }
 
 /**
  * \brief Serialize a int48_t in the buffer
@@ -1237,7 +1237,7 @@ void SET_INT32(char* buf, const std::size_t offset, const int32_t val, std::size
  * \note For convenience the int48 is stored into a int64_t
  * \param val Value to serialize
  */
-void SET_INT48(char* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT48(buf, offset, val); length += INT48_SIZE; }
+inline void SET_INT48(char* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT48(buf, offset, val); length += INT48_SIZE; }
 
 /**
  * \brief Serialize a int64_t in the buffer
@@ -1246,7 +1246,7 @@ void SET_INT48(char* buf, const std::size_t offset, const int64_t val, std::size
  * \param length Auto Increment this variable by the size of int64_t
  * \param val Value to serialize
  */
-void SET_INT64(char* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT64(buf, offset, val); length += INT64_SIZE; }
+inline void SET_INT64(char* buf, const std::size_t offset, const int64_t val, std::size_t& length) { SET_INT64(buf, offset, val); length += INT64_SIZE; }
 
 /**
  * \brief Serialize a float in the buffer
@@ -1255,7 +1255,7 @@ void SET_INT64(char* buf, const std::size_t offset, const int64_t val, std::size
  * \param length Auto Increment this variable by the size of float
  * \param val Value to serialize
  */
-void SET_FLOAT32(char* buf, const std::size_t offset, const float val, std::size_t& length) { SET_FLOAT32(buf, offset, val); length += UINT32_SIZE; }
+inline void SET_FLOAT32(char* buf, const std::size_t offset, const float val, std::size_t& length) { SET_FLOAT32(buf, offset, val); length += UINT32_SIZE; }
 
 /**
  * \brief Serialize a double in the buffer
@@ -1264,40 +1264,7 @@ void SET_FLOAT32(char* buf, const std::size_t offset, const float val, std::size
  * \param length Auto Increment this variable by the size of double
  * \param val Value to serialize
  */
-void SET_FLOAT64(char* buf, const std::size_t offset, const double val, std::size_t& length) { SET_FLOAT64(buf, offset, val); length += UINT64_SIZE; }
-
-/**
- * memcpy from a big endian 16 bits to a local buffer
- * \param dest ptr to local std::uint16_t buffer, that contains std::uint16_t
- * \param src ptr to big endian buffer of std::uint16_t that need to be deserialized in dest
- * \param count Number of std::uint16_t in src
- */
-void MEMCPY_16(char* dest, const char* src, const std::size_t count)
-{
-    MEMCPY_16((std::uint8_t*)dest, (const std::uint8_t*)src, count);
-}
-
-/**
- * memcpy from a big endian 32 bits to a local buffer
- * \param dest ptr to local std::uint32_t buffer, that contains std::uint32_t
- * \param src ptr to big endian buffer of std::uint32_t that need to be deserialized in dest
- * \param count Number of std::uint32_t in src
- */
-void MEMCPY_32(char* dest, const char* src, const std::size_t count)
-{
-    MEMCPY_32((std::uint8_t*)dest, (const std::uint8_t*)src, count);
-}
-
-/**
- * memcpy from a big endian 64 bits to a local buffer
- * \param dest ptr to local std::uint64_t buffer, that contains std::uint64_t
- * \param src ptr to big endian buffer of std::uint64_t that need to be deserialized in dest
- * \param count Number of std::uint64_t in src
- */
-void MEMCPY_64(char* dest, const char* src, const std::size_t count)
-{
-    MEMCPY_64((std::uint8_t*)dest, (const std::uint8_t*)src, count);
-}
+inline void SET_FLOAT64(char* buf, const std::size_t offset, const double val, std::size_t& length) { SET_FLOAT64(buf, offset, val); length += UINT64_SIZE; }
 
 }
 }
