@@ -7,7 +7,7 @@
 
 #include <cstdint>
 
-namespace Endn {
+namespace endn {
 
 /** Size of std::uint8_t variable (1 byte) */
 static const std::uint8_t UINT8_SIZE = 1;

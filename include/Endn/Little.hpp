@@ -22,8 +22,8 @@
 //                  DECLARATION
 // ─────────────────────────────────────────────────────────────
 
-namespace Endn {
-namespace Little {
+namespace endn {
+namespace little {
 
 // ─────────────────────────────────────────────────────────────
 //                  CLASS
