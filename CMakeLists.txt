@@ -103,6 +103,7 @@ set(ENDN_SRCS
 
 add_library(${ENDN_TARGET} INTERFACE)
 target_sources(${ENDN_TARGET} INTERFACE "${ENDN_SRCS}")
+target_compile_features(${ENDN_TARGET} INTERFACE cxx_std_11)
 
 target_include_directories(${ENDN_TARGET} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include/mylib>)
 
