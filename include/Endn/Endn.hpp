@@ -40,24 +40,13 @@ inline bool IS_16_ALIGNED(const std::uintptr_t ptr) { return ptr % 2 == 0; }
 inline bool IS_32_ALIGNED(const std::uintptr_t ptr) { return ptr % 4 == 0; }
 inline bool IS_64_ALIGNED(const std::uintptr_t ptr) { return ptr % 8 == 0; }
 
-inline bool IS_16_ALIGNED(const std::uint8_t* ptr)
-{
-    return IS_16_ALIGNED(std::uintptr_t(ptr));
-}
-inline bool IS_32_ALIGNED(const std::uint8_t* ptr)
-{
-    return IS_32_ALIGNED(std::uintptr_t(ptr));
-}
-inline bool IS_64_ALIGNED(const std::uint8_t* ptr)
-{
-    return IS_64_ALIGNED(std::uintptr_t(ptr));
-}
+inline bool IS_16_ALIGNED(const std::uint8_t* ptr) { return IS_16_ALIGNED(std::uintptr_t(ptr)); }
+inline bool IS_32_ALIGNED(const std::uint8_t* ptr) { return IS_32_ALIGNED(std::uintptr_t(ptr)); }
+inline bool IS_64_ALIGNED(const std::uint8_t* ptr) { return IS_64_ALIGNED(std::uintptr_t(ptr)); }
 
-inline bool OVERLAP(const std::uintptr_t ptr1, const std::uintptr_t ptr2,
-    const std::uint64_t count)
+inline bool OVERLAP(const std::uintptr_t ptr1, const std::uintptr_t ptr2, const std::uint64_t count)
 {
-    return (ptr1 <= ptr2 && ptr1 + count > ptr2) ||
-           (ptr2 <= ptr1 && ptr2 + count > ptr1);
+    return (ptr1 <= ptr2 && ptr1 + count > ptr2) || (ptr2 <= ptr1 && ptr2 + count > ptr1);
 }
 
 }
