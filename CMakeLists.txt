@@ -30,6 +30,11 @@
 
 cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
+set(ENDN_MAIN_PROJECT OFF)
+if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(ENDN_MAIN_PROJECT ON)
+endif()
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       PROJECT SETTINGS                           │
 # └──────────────────────────────────────────────────────────────────┘
@@ -37,6 +42,7 @@ cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 set(ENDN_TARGET "Endn" CACHE STRING "Target Name")
 set(ENDN_PROJECT "Endn" CACHE STRING "Project Name")
 set(ENDN_ENABLE_BSWAP ON CACHE BOOL "Enable the use of bswap32/64 macros if required")
+set(ENDN_ENABLE_TESTS OFF CACHE BOOL "Enable Endn unit tests")
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       VERSION                                    │
@@ -44,7 +50,7 @@ set(ENDN_ENABLE_BSWAP ON CACHE BOOL "Enable the use of bswap32/64 macros if requ
 
 # Project version must be set here
 set(ENDN_VERSION_MAJOR 1)
-set(ENDN_VERSION_MINOR 2)
+set(ENDN_VERSION_MINOR 3)
 set(ENDN_VERSION_PATCH 0)
 set(ENDN_VERSION ${ENDN_VERSION_MAJOR}.${ENDN_VERSION_MINOR}.${ENDN_VERSION_PATCH} CACHE STRING "Endn Version")
 
@@ -73,6 +79,7 @@ message(STATUS "ENDN_PROJECT                : ${ENDN_PROJECT}")
 message(STATUS "ENDN_VERSION                : ${ENDN_VERSION}")
 message(STATUS "ENDN_VERSION_TAG_HEX        : ${ENDN_VERSION_TAG_HEX}")
 message(STATUS "ENDN_ENABLE_BSWAP           : ${ENDN_ENABLE_BSWAP}")
+message(STATUS "ENDN_ENABLE_TESTS           : ${ENDN_ENABLE_TESTS}")
 
 message(STATUS "------ ${ENDN_TARGET} End Configuration ------")
 
@@ -105,4 +112,40 @@ endif()
 
 if(IS_BIG_ENDIAN)
   target_compile_definitions(${ENDN_TARGET} INTERFACE -DENDN_IS_BIG_ENDIAN)
+endif()
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │                       UNIT TESTS                                 │
+# └──────────────────────────────────────────────────────────────────┘
+
+if(ENDN_ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │                       UNIT TESTS                                 │
+# └──────────────────────────────────────────────────────────────────┘
+
+if(ENDN_MAIN_PROJECT)
+
+include(ProcessorCount)
+ProcessorCount(N)
+if(N EQUAL 0)
+  set(PARALLEL_LEVEL "")
+else()
+  set(PARALLEL_LEVEL "-j${N}")
+endif()
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release")
+endif()
+
+if(TARGET "${ENDN_TARGET}Tests")
+message(STATUS " ")
+message(STATUS "Tests:")
+message(STATUS "  EndnTests             : cmake --build . --target ${ENDN_TARGET}Tests --config ${CMAKE_BUILD_TYPE} ${PARALLEL_LEVEL}")
+message(STATUS "  Run Tests             : ctest -C ${CMAKE_BUILD_TYPE} . --verbose --progress")
+endif()
+
 endif()
