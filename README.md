@@ -133,8 +133,8 @@ target_link_libraries(MyTarget Endn)
 
 ### Input
 
-- **ENDN_TARGET** : Name of the library target. *Default : "LibEndian"*
-- **ENDN_PROJECT** : Name of the project. *Default : "LibEndian"*
+- **ENDN_TARGET** : Name of the library target. *Default : "Endn"*
+- **ENDN_PROJECT** : Name of the project. *Default : "Endn"*
 - **ENDN_ENABLE_BSWAP**: Enable build in swap function if available. *Default: ON*.
 - **ENDN_ENABLE_TESTS**: Enable Endn unit tests. *Default: OFF*.
 
