@@ -67,6 +67,9 @@ endif()
 set(ENDN_VERSION_TAG_HEX 0x${ENDN_VERSION_TAG})
 
 project(${ENDN_PROJECT} VERSION ${ENDN_VERSION} LANGUAGES C CXX)
+if(ENDN_MAIN_PROJECT)
+  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+endif()
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       STATUS                                     │
