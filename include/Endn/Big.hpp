@@ -408,27 +408,12 @@ inline void SET_UINT32(std::uint8_t* buf, const std::uint32_t val)
  */
 inline void SET_UINT48(std::uint8_t* buf, const std::uint64_t val)
 {
-#ifdef ENDN_ENABLE_BSWAP
-#    ifdef ENDN_IS_BIG_ENDIAN
-    if(IS_64_ALIGNED(std::uintptr_t(buf)))
-    {
-        (*(std::uint64_t*)buf) = val & std::uint64_t(0xFFFFFFFFFFFF);
-        return;
-    }
-#    else
-    if(IS_64_ALIGNED(std::uintptr_t(buf)))
-    {
-        (*(std::uint64_t*)buf) = bswap_64(val) & std::uint64_t(0xFFFFFFFFFFFF);
-        return;
-    }
-#    endif
-#endif
-    buf[0] = (std::uint8_t)((val >> 40) & 0xFF);
-    buf[1] = (std::uint8_t)((val >> 32) & 0xFF);
-    buf[2] = (std::uint8_t)((val >> 24) & 0xFF);
-    buf[3] = (std::uint8_t)((val >> 16) & 0xFF);
-    buf[4] = (std::uint8_t)((val >> 8) & 0xFF);
-    buf[5] = (std::uint8_t)(val & 0xFF);
+    buf[0] = std::uint8_t((val >> 40) & 0xFF);
+    buf[1] = std::uint8_t((val >> 32) & 0xFF);
+    buf[2] = std::uint8_t((val >> 24) & 0xFF);
+    buf[3] = std::uint8_t((val >> 16) & 0xFF);
+    buf[4] = std::uint8_t((val >> 8) & 0xFF);
+    buf[5] = std::uint8_t(val & 0xFF);
 }
 
 /**
