@@ -17,6 +17,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <cstring>
+#include <cassert>
 
 // ─────────────────────────────────────────────────────────────
 //                  DECLARATION
@@ -36,6 +37,7 @@ namespace big {
  */
 inline std::uint8_t GET_UINT8(const std::uint8_t* buf)
 {
+    assert(buf);
     return ((std::uint8_t)buf[0]);
 }
 
@@ -46,13 +48,14 @@ inline std::uint8_t GET_UINT8(const std::uint8_t* buf)
  */
 inline std::uint16_t GET_UINT16(const std::uint8_t* buf)
 {
+    assert(buf);
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_16_ALIGNED(std::uintptr_t(buf)))
         return std::uint16_t(*(const std::uint16_t*)(buf));
 #    else
     if(IS_16_ALIGNED(std::uintptr_t(buf)))
-        return bswap_16(std::uint16_t(*buf));
+        return bswap_16(*reinterpret_cast<const std::uint16_t*>(buf));
 #    endif
 #endif
     return ((std::uint16_t)buf[0] << 8) | ((std::uint16_t)buf[1]);
@@ -65,13 +68,14 @@ inline std::uint16_t GET_UINT16(const std::uint8_t* buf)
  */
 inline std::uint32_t GET_UINT32(const std::uint8_t* buf)
 {
+    assert(buf);
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_32_ALIGNED(std::uintptr_t(buf)))
         return std::uint32_t(*(const std::uint32_t*)(buf));
 #    else
     if(IS_32_ALIGNED(std::uintptr_t(buf)))
-        return bswap_32(std::uint32_t(*buf));
+        return bswap_32(*reinterpret_cast<const std::uint32_t*>(buf));
 #    endif
 #endif
     return ((std::uint32_t)buf[0] << 24) | ((std::uint32_t)buf[1] << 16) | ((std::uint32_t)buf[2] << 8) | ((std::uint32_t)buf[3]);
@@ -85,13 +89,14 @@ inline std::uint32_t GET_UINT32(const std::uint8_t* buf)
  */
 inline std::uint64_t GET_UINT48(const std::uint8_t* buf)
 {
+    assert(buf);
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
         return std::uint64_t(*(const std::uint64_t*)(buf)) & std::uint64_t(0xFFFFFFFFFFFF);
 #    else
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
-        return bswap_64(std::uint64_t(*buf)) & std::uint64_t(0xFFFFFFFFFFFF);
+        return bswap_64(*reinterpret_cast<const std::uint64_t*>(buf) << 16) & std::uint64_t(0x0000FFFFFFFFFFFF);
 #    endif
 #endif
     return ((std::uint64_t)buf[0] << 40) | ((std::uint64_t)buf[1] << 32) | ((std::uint64_t)buf[2] << 24) | ((std::uint64_t)buf[3] << 16)
@@ -105,13 +110,14 @@ inline std::uint64_t GET_UINT48(const std::uint8_t* buf)
  */
 inline std::uint64_t GET_UINT64(const std::uint8_t* buf)
 {
+    assert(buf);
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
         return std::uint64_t(*(const std::uint64_t*)(buf));
 #    else
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
-        return bswap_64(std::uint64_t(*buf));
+        return bswap_64(*reinterpret_cast<const std::uint64_t*>(buf));
 #    endif
 #endif
     return ((std::uint64_t)buf[0] << 56) | ((std::uint64_t)buf[1] << 48) | ((std::uint64_t)buf[2] << 40) | ((std::uint64_t)buf[3] << 32)
