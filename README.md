@@ -26,13 +26,13 @@ All the types are from `cstdint`.
 
 ## Quick Start
 
-**Endn** provide 2 main namespace: `Endn::Little` and `Endn::Big`. You should use one or the other depending on which format you need to handle.
+**Endn** provide 2 main namespace: `endn::little` and `endn::big`. You should use one or the other depending on which format you need to handle.
 
 If you need to choose a format for you protocol, you should go with little endian because most cpu nowadays are little endian. This will reduce execution on most machine.
 
 ### Serialization
 
-Both namespace provide function in the form `GET_<TYPE>`. That return a copy of the type in host ordered bytes. 
+Both namespace provide function in the form `GET_<TYPE>`. That return a copy of the type in host ordered bytes.
 
 Read function come with 2 signatures:
 
@@ -44,22 +44,22 @@ Read function come with 2 signatures:
 #include <Endn/Big.hpp>
 
 void main()
-{  
+{
     std::uint8_t buffer[] = {0x12, 0x34, 0x56, 0x78};
-    
+
     std::uint32_t u32;
     // Value is 0x012345678
-    u32 = Endn::Big::GET_UINT32(buffer);
+    u32 = endn::big::GET_UINT32(buffer);
     // Value is 0x78563412
-    u32 = Endn::Little::GET_UINT32(buffer);
-    
+    u32 = endn::little::GET_UINT32(buffer);
+
     std::uint16_t u16;
     // Read at offset, value is 0x1234
-    u16 = Endn::Big::GET_UINT16(buffer, 0);
+    u16 = endn::big::GET_UINT16(buffer, 0);
     // Read at offset, value is 0x3456
-    u16 = Endn::Big::GET_UINT16(buffer, 1);
-    // Read at offset, value is 5678
-    u16 = Endn::Big::GET_UINT16(buffer, 2);  
+    u16 = endn::big::GET_UINT16(buffer, 1);
+    // Read at offset, value is 0x5678
+    u16 = endn::big::GET_UINT16(buffer, 2);
 }
 ```
 
@@ -76,25 +76,25 @@ To write, both namespace provide `SET_<TYPE>` functions. They come with 3 signat
 #include <Endn/Big.hpp>
 
 void main()
-{  
+{
     std::uint8_t buffer[] = {0x12, 0x34, 0x56, 0x78};
-    
+
     // buffer is now {0xAB, 0xCD, 0x56, 0x78}
-    Endn::Big::SET_UINT16(buffer, 0xABCD); 
+    endn::big::SET_UINT16(buffer, 0xABCD);
     // buffer is now {0xCD, 0xAB, 0x56, 0x78}
-    Endn::Little::SET_UINT16(buffer, 0xABCD);
-    
+    endn::little::SET_UINT16(buffer, 0xABCD);
+
     // buffer is now {0xCD, 0xAB, 0x12, 0x34}
-    Endn::Big::SET_UINT16(buffer, 2, 0x1234); 
-    
+    endn::big::SET_UINT16(buffer, 2, 0x1234);
+
     // buffer is now {0xCD, 0x56, 0x78, 0x34}
-    Endn::Little::SET_UINT16(buffer, 1, 0x5678); 
-    
+    endn::little::SET_UINT16(buffer, 1, 0x5678);
+
     std::size_t length = 0;
-    
+
     // buffer is now {0xCD, 0x56, 0x12, 0x34}
     // length is now 2
-    Endn::Big::SET_UINT16(buffer, 2, 0x1234, length); 
+    endn::big::SET_UINT16(buffer, 2, 0x1234, length);
 }
 ```
 
@@ -136,6 +136,7 @@ target_link_libraries(MyTarget Endn)
 - **ENDN_TARGET** : Name of the library target. *Default : "LibEndian"*
 - **ENDN_PROJECT** : Name of the project. *Default : "LibEndian"*
 - **ENDN_ENABLE_BSWAP**: Enable build in swap function if available. *Default: ON*.
+- **ENDN_ENABLE_TESTS**: Enable Endn unit tests. *Default: OFF*.
 
 ### Output
 
@@ -151,3 +152,6 @@ target_link_libraries(MyTarget Endn)
   * Drop support for class, to use namespace instead.
   * Use `std` types instead of `c` types for `*int*`.
   * Library is now an `INTERFACE` instead of a binary library.
+* **v1.3.0**: Critical fix for GET_UINT16/32/48/64 (casting issue)
+  * Unit tests on amd64 (windows/mac/linux)
+  * Unit tests on arm64/ppc64le/s390x (linux)

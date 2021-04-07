@@ -17,13 +17,6 @@
 #   - ENDN_VERSION : Current version of the library
 #
 
-#
-## VERSION
-#   - 1.0.0 : 06/12/2018 : Initial Work
-#   - 1.0.2 : 10/12/2018 : Fix filename
-#   - 1.1.0 : 30/01/2020 : Use bswap32/64 if byte is aligned
-#   - 1.2.0 : 13/05/2020 : Turn library into INTERFACE library, remove useless cmake variables
-
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       CMAKE PROPERTIES                           │
 # └──────────────────────────────────────────────────────────────────┘
