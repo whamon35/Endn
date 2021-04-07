@@ -49,7 +49,7 @@ inline std::uint16_t GET_UINT16(const std::uint8_t* buf)
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_16_ALIGNED(std::uintptr_t(buf)))
-        return bswap_16(std::uint16_t(*buf));
+        return bswap_16(*reinterpret_cast<const std::uint16_t*>(buf));
 #    else
     if(IS_16_ALIGNED(std::uintptr_t(buf)))
         return std::uint16_t(*(const std::uint16_t*)(buf));
@@ -68,7 +68,7 @@ inline std::uint32_t GET_UINT32(const std::uint8_t* buf)
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_32_ALIGNED(std::uintptr_t(buf)))
-        return bswap_32(std::uint32_t(*buf));
+        return bswap_32(*reinterpret_cast<const std::uint32_t*>(buf));
 #    else
     if(IS_32_ALIGNED(std::uintptr_t(buf)))
         return std::uint32_t(*(const std::uint32_t*)(buf));
@@ -88,7 +88,7 @@ inline std::uint64_t GET_UINT48(const std::uint8_t* buf)
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
-        return bswap_64(std::uint64_t(*buf)) & std::uint64_t(0xFFFFFFFFFFFF);
+        return bswap_64(*reinterpret_cast<const std::uint64_t*>(buf) << 16) & std::uint64_t(0x0000FFFFFFFFFFFF);
 #    else
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
         return std::uint64_t(*(const std::uint64_t*)(buf)) & std::uint64_t(0xFFFFFFFFFFFF);
@@ -108,7 +108,7 @@ inline std::uint64_t GET_UINT64(const std::uint8_t* buf)
 #ifdef ENDN_ENABLE_BSWAP
 #    ifdef ENDN_IS_BIG_ENDIAN
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
-        return bswap_64(std::uint64_t(*buf));
+        return bswap_64(*reinterpret_cast<const std::uint64_t*>(buf));
 #    else
     if(IS_64_ALIGNED(std::uintptr_t(buf)))
         return std::uint64_t(*(const std::uint64_t*)(buf));
@@ -402,21 +402,6 @@ inline void SET_UINT32(std::uint8_t* buf, const std::uint32_t val)
  */
 inline void SET_UINT48(std::uint8_t* buf, const std::uint64_t val)
 {
-#ifdef ENDN_ENABLE_BSWAP
-#    ifdef ENDN_IS_BIG_ENDIAN
-    if(IS_64_ALIGNED(std::uintptr_t(buf)))
-    {
-        (*(std::uint64_t*)buf) = bswap_64(val) & std::uint64_t(0xFFFFFFFFFFFF);
-        return;
-    }
-#    else
-    if(IS_64_ALIGNED(std::uintptr_t(buf)))
-    {
-        (*(std::uint64_t*)buf) = val & std::uint64_t(0xFFFFFFFFFFFF);
-        return;
-    }
-#    endif
-#endif
     buf[5] = (std::uint8_t)((val >> 40) & 0xFF);
     buf[4] = (std::uint8_t)((val >> 32) & 0xFF);
     buf[3] = (std::uint8_t)((val >> 24) & 0xFF);
