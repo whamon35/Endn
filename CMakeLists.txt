@@ -96,9 +96,10 @@ target_sources(${ENDN_TARGET} INTERFACE "${ENDN_SRCS}")
 
 target_include_directories(${ENDN_TARGET} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include/mylib>)
 
+include (TestBigEndian)
+test_big_endian(IS_BIG_ENDIAN)
+
 if(ENDN_ENABLE_BSWAP)
-  include (TestBigEndian)
-  test_big_endian(IS_BIG_ENDIAN)
   target_compile_definitions(${ENDN_TARGET} INTERFACE -DENDN_ENABLE_BSWAP)
 endif()
 
