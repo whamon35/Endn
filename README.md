@@ -1,6 +1,8 @@
 Endn
 =============
 
+[![👷 CI](https://github.com/OlivierLDff/Endn/actions/workflows/main.yml/badge.svg)](https://github.com/OlivierLDff/Endn/actions/workflows/main.yml)
+
 A cross platform C++ library to get rid with of binary serialization issues. This library can serialize in buffer the most common types.
 
 ## Supported Types
