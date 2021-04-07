@@ -15,6 +15,7 @@ add_executable(${ENDN_TESTS_TARGET} ${ENDN_TESTS_SRCS})
 target_link_libraries(${ENDN_TESTS_TARGET} PRIVATE
   ${ENDN_TARGET}
   gtest
+  gmock
 )
 set_target_properties(${ENDN_TESTS_TARGET} PROPERTIES FOLDER "Tests")
 
