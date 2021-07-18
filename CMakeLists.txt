@@ -95,6 +95,7 @@ set(ENDN_SRCS
 # └──────────────────────────────────────────────────────────────────┘
 
 add_library(${ENDN_TARGET} INTERFACE)
+add_library(${ENDN_TARGET}::${ENDN_TARGET} ALIAS ${ENDN_TARGET})
 target_sources(${ENDN_TARGET} INTERFACE "${ENDN_SRCS}")
 target_compile_features(${ENDN_TARGET} INTERFACE cxx_std_11)
 
