@@ -6,10 +6,8 @@
 #
 #   - ENDN_TARGET : Name of the library target. Default : "Endn"
 #   - ENDN_PROJECT : Name of the project. Default : "Endn"
-#   - ENDN_BUILD_DOC : Build the Endn Doc [ON OFF]. Default: OFF.
-#   - ENDN_DOXYGEN_BT_REPOSITORY : Repository of DoxygenBt. Default : "https://github.com/OlivierLDff/DoxygenBootstrapped.git"
-#   - ENDN_DOXYGEN_BT_TAG : Git Tag of DoxygenBt. Default : "v1.3.1"
-
+#   - ENDN_ENABLE_BSWAP : Enable the use of bswap32/64 macros if required
+#   - ENDN_ENABLE_TESTS : Enable Endn unit tests
 #
 ## CMAKE OUTPUT
 #
