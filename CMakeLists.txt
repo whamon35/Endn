@@ -34,6 +34,7 @@ set(ENDN_TARGET "Endn" CACHE STRING "Target Name")
 set(ENDN_PROJECT "Endn" CACHE STRING "Project Name")
 set(ENDN_ENABLE_BSWAP ON CACHE BOOL "Enable the use of bswap32/64 macros if required")
 set(ENDN_ENABLE_TESTS OFF CACHE BOOL "Enable Endn unit tests")
+set(ENDN_VERBOSE ${ENDN_MAIN_PROJECT} CACHE BOOL "Endn Log Configuration")
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       VERSION                                    │
@@ -42,7 +43,7 @@ set(ENDN_ENABLE_TESTS OFF CACHE BOOL "Enable Endn unit tests")
 # Project version must be set here
 set(ENDN_VERSION_MAJOR 1)
 set(ENDN_VERSION_MINOR 3)
-set(ENDN_VERSION_PATCH 1)
+set(ENDN_VERSION_PATCH 2)
 set(ENDN_VERSION ${ENDN_VERSION_MAJOR}.${ENDN_VERSION_MINOR}.${ENDN_VERSION_PATCH} CACHE STRING "Endn Version")
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
@@ -66,16 +67,18 @@ endif()
 # │                       STATUS                                     │
 # └──────────────────────────────────────────────────────────────────┘
 
-message(STATUS  "------ ${ENDN_TARGET} Configuration ${ENDN_VERSION} ------")
+if(ENDN_VERBOSE)
+  message(STATUS  "------ ${ENDN_TARGET} Configuration ${ENDN_VERSION} ------")
 
-message(STATUS "ENDN_TARGET                 : ${ENDN_TARGET}")
-message(STATUS "ENDN_PROJECT                : ${ENDN_PROJECT}")
-message(STATUS "ENDN_VERSION                : ${ENDN_VERSION}")
-message(STATUS "ENDN_VERSION_TAG_HEX        : ${ENDN_VERSION_TAG_HEX}")
-message(STATUS "ENDN_ENABLE_BSWAP           : ${ENDN_ENABLE_BSWAP}")
-message(STATUS "ENDN_ENABLE_TESTS           : ${ENDN_ENABLE_TESTS}")
+  message(STATUS "ENDN_TARGET                 : ${ENDN_TARGET}")
+  message(STATUS "ENDN_PROJECT                : ${ENDN_PROJECT}")
+  message(STATUS "ENDN_VERSION                : ${ENDN_VERSION}")
+  message(STATUS "ENDN_VERSION_TAG_HEX        : ${ENDN_VERSION_TAG_HEX}")
+  message(STATUS "ENDN_ENABLE_BSWAP           : ${ENDN_ENABLE_BSWAP}")
+  message(STATUS "ENDN_ENABLE_TESTS           : ${ENDN_ENABLE_TESTS}")
 
-message(STATUS "------ ${ENDN_TARGET} End Configuration ------")
+  message(STATUS "------ ${ENDN_TARGET} End Configuration ------")
+endif()
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       SOURCES                                    │
