@@ -1,18 +1,17 @@
 #
-#   Endn CMake script by Olivier Le Doeuff
-
+# Endn CMake script by Olivier Le Doeuff
 #
-## CMAKE INPUT
+# CMAKE INPUT
 #
-#   - ENDN_TARGET : Name of the library target. Default : "Endn"
-#   - ENDN_PROJECT : Name of the project. Default : "Endn"
-#   - ENDN_ENABLE_BSWAP : Enable the use of bswap32/64 macros if required
-#   - ENDN_ENABLE_TESTS : Enable Endn unit tests
+# * ENDN_TARGET : Name of the library target. Default : "Endn"
+# * ENDN_PROJECT : Name of the project. Default : "Endn"
+# * ENDN_ENABLE_BSWAP : Enable the use of bswap32/64 macros if required
+# * ENDN_ENABLE_TESTS : Enable Endn unit tests
 #
-## CMAKE OUTPUT
+# CMAKE OUTPUT
 #
-#   - ENDN_TARGET : Output target to link to. Default: Endn
-#   - ENDN_VERSION : Current version of the library
+# * ENDN_TARGET : Output target to link to. Default: Endn
+# * ENDN_VERSION : Current version of the library
 #
 
 # ┌──────────────────────────────────────────────────────────────────┐
@@ -22,7 +21,7 @@
 cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 set(ENDN_MAIN_PROJECT OFF)
-if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   set(ENDN_MAIN_PROJECT ON)
 endif()
 
@@ -30,11 +29,26 @@ endif()
 # │                       PROJECT SETTINGS                           │
 # └──────────────────────────────────────────────────────────────────┘
 
-set(ENDN_TARGET "Endn" CACHE STRING "Target Name")
-set(ENDN_PROJECT "Endn" CACHE STRING "Project Name")
-set(ENDN_ENABLE_BSWAP ON CACHE BOOL "Enable the use of bswap32/64 macros if required")
-set(ENDN_ENABLE_TESTS OFF CACHE BOOL "Enable Endn unit tests")
-set(ENDN_VERBOSE ${ENDN_MAIN_PROJECT} CACHE BOOL "Endn Log Configuration")
+set(ENDN_TARGET
+    "Endn"
+    CACHE STRING "Target Name"
+)
+set(ENDN_PROJECT
+    "Endn"
+    CACHE STRING "Project Name"
+)
+set(ENDN_ENABLE_BSWAP
+    ON
+    CACHE BOOL "Enable the use of bswap32/64 macros if required"
+)
+set(ENDN_ENABLE_TESTS
+    OFF
+    CACHE BOOL "Enable Endn unit tests"
+)
+set(ENDN_VERBOSE
+    ${ENDN_MAIN_PROJECT}
+    CACHE BOOL "Endn Log Configuration"
+)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       VERSION                                    │
@@ -44,7 +58,10 @@ set(ENDN_VERBOSE ${ENDN_MAIN_PROJECT} CACHE BOOL "Endn Log Configuration")
 set(ENDN_VERSION_MAJOR 1)
 set(ENDN_VERSION_MINOR 3)
 set(ENDN_VERSION_PATCH 2)
-set(ENDN_VERSION ${ENDN_VERSION_MAJOR}.${ENDN_VERSION_MINOR}.${ENDN_VERSION_PATCH} CACHE STRING "Endn Version")
+set(ENDN_VERSION
+    ${ENDN_VERSION_MAJOR}.${ENDN_VERSION_MINOR}.${ENDN_VERSION_PATCH}
+    CACHE STRING "Endn Version"
+)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(
@@ -58,7 +75,11 @@ else()
 endif()
 set(ENDN_VERSION_TAG_HEX 0x${ENDN_VERSION_TAG})
 
-project(${ENDN_PROJECT} VERSION ${ENDN_VERSION} LANGUAGES CXX)
+project(
+  ${ENDN_PROJECT}
+  VERSION ${ENDN_VERSION}
+  LANGUAGES CXX
+)
 if(ENDN_MAIN_PROJECT)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
@@ -68,7 +89,7 @@ endif()
 # └──────────────────────────────────────────────────────────────────┘
 
 if(ENDN_VERBOSE)
-  message(STATUS  "------ ${ENDN_TARGET} Configuration ${ENDN_VERSION} ------")
+  message(STATUS "------ ${ENDN_TARGET} Configuration ${ENDN_VERSION} ------")
 
   message(STATUS "ENDN_TARGET                 : ${ENDN_TARGET}")
   message(STATUS "ENDN_PROJECT                : ${ENDN_PROJECT}")
@@ -85,11 +106,11 @@ endif()
 # └──────────────────────────────────────────────────────────────────┘
 
 set(ENDN_SRCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Endn.hpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Helpers.hpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Little.hpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Big.hpp
- )
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Endn.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Helpers.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Little.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Endn/Big.hpp
+)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │                       TARGET                                     │
@@ -100,9 +121,13 @@ add_library(${ENDN_TARGET}::${ENDN_TARGET} ALIAS ${ENDN_TARGET})
 target_sources(${ENDN_TARGET} INTERFACE "${ENDN_SRCS}")
 target_compile_features(${ENDN_TARGET} INTERFACE cxx_std_11)
 
-target_include_directories(${ENDN_TARGET} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include/mylib>)
+target_include_directories(
+  ${ENDN_TARGET}
+  INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+            $<INSTALL_INTERFACE:include/mylib>
+)
 
-include (TestBigEndian)
+include(TestBigEndian)
 test_big_endian(IS_BIG_ENDIAN)
 
 if(ENDN_ENABLE_BSWAP)
@@ -128,23 +153,29 @@ endif()
 
 if(ENDN_MAIN_PROJECT)
 
-include(ProcessorCount)
-ProcessorCount(N)
-if(N EQUAL 0)
-  set(PARALLEL_LEVEL "")
-else()
-  set(PARALLEL_LEVEL "-j${N}")
-endif()
+  include(ProcessorCount)
+  ProcessorCount(N)
+  if(N EQUAL 0)
+    set(PARALLEL_LEVEL "")
+  else()
+    set(PARALLEL_LEVEL "-j${N}")
+  endif()
 
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
-endif()
+  if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+  endif()
 
-if(TARGET "${ENDN_TARGET}Tests")
-message(STATUS " ")
-message(STATUS "Tests:")
-message(STATUS "  EndnTests             : cmake --build . --target ${ENDN_TARGET}Tests --config ${CMAKE_BUILD_TYPE} ${PARALLEL_LEVEL}")
-message(STATUS "  Run Tests             : ctest -C ${CMAKE_BUILD_TYPE} . --verbose --progress")
-endif()
+  if(TARGET "${ENDN_TARGET}Tests")
+    message(STATUS " ")
+    message(STATUS "Tests:")
+    message(
+      STATUS
+        "  EndnTests             : cmake --build . --target ${ENDN_TARGET}Tests --config ${CMAKE_BUILD_TYPE} ${PARALLEL_LEVEL}"
+    )
+    message(
+      STATUS
+        "  Run Tests             : ctest -C ${CMAKE_BUILD_TYPE} . --verbose --progress"
+    )
+  endif()
 
 endif()
