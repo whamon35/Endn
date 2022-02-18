@@ -1,7 +1,7 @@
 include(FetchContent)
 
-set(GTEST_REPOSITORY "https://github.com/google/googletest" CACHE STRING "googletest repository url")
-set(GTEST_TAG "master" CACHE STRING "googletest git tag")
+set(GTEST_REPOSITORY "https://github.com/OlivierLDff/googletest" CACHE STRING "googletest repository url")
+set(GTEST_TAG "main" CACHE STRING "googletest git tag")
 
 FetchContent_Declare(
   googletest
